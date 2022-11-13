@@ -23,41 +23,21 @@ class ViewController: UIViewController {
     // Craete game
     func game() {
         _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { tim in
-
-            let height = (self.screen.frame.size.height) - (self.butterflyBtn.frame.size.height)
-            let width = (self.screen.frame.size.width) - (self.butterflyBtn.frame.size.width)
-
+            
             let heightButterfly = self.butterflyBtn.frame.size.height
             let widthButterfly = self.butterflyBtn.frame.size.width
+
+            let height = (self.screen.frame.size.height) - heightButterfly
+            let width = (self.screen.frame.size.width) - widthButterfly
 
             self.butterflyBtn.frame = CGRect(x: self.rndNumber(maxValue: Int(width)),
                                              y: self.rndNumber(maxValue: Int(height)),
                                              width: Int(widthButterfly),
                                              height: Int(heightButterfly))
 
+            self.winnerLoser(tim: tim)
             self.taps()
             
-            // When you WIN
-            if self.count == 10 {
-                self.alertView(title: "Has Ganado",
-                               message: "Quieres Repetir",
-                               titleOk: "Repetir",
-                               titleCancel: "Cancel",
-                               lost: false,
-                               tim: tim)
-                return
-            }
-            // When you LOSE
-            if self.lost == true {
-                self.alertView(title: "Has Perdido",
-                               message: "¿Quieres Repetir?",
-                               titleOk: "Repetir",
-                               titleCancel: "Cancel",
-                               lost: false,
-                               tim: tim)
-                return
-            }
-
         })
     }
 
@@ -122,5 +102,28 @@ class ViewController: UIViewController {
         self.butterflyBtn.isUserInteractionEnabled = true
         tapButterfly.numberOfTapsRequired = 2
         self.butterflyBtn.addGestureRecognizer(tapButterfly)
+    }
+    
+    func winnerLoser(tim: Timer){
+        // When you WIN
+        if self.count == 10 {
+            self.alertView(title: "Has Ganado",
+                           message: "Quieres Repetir",
+                           titleOk: "Repetir",
+                           titleCancel: "Cancel",
+                           lost: false,
+                           tim: tim)
+            return
+        }
+        // When you LOSE
+        if self.lost == true {
+            self.alertView(title: "Has Perdido",
+                           message: "¿Quieres Repetir?",
+                           titleOk: "Repetir",
+                           titleCancel: "Cancel",
+                           lost: false,
+                           tim: tim)
+            return
+        }
     }
 }
