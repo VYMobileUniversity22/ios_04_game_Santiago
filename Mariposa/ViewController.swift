@@ -35,18 +35,8 @@ class ViewController: UIViewController {
                                              width: Int(widthButterfly),
                                              height: Int(heightButterfly))
 
-            let tapButterfly = UITapGestureRecognizer(target: self,
-                                                      action: #selector(self.tapped(_:)))
-            let tapScreen = UITapGestureRecognizer(target: self,
-                                                   action: #selector(self.tappedScreen(_:)))
-
-            tapScreen.numberOfTapsRequired = 2
-            self.screen.addGestureRecognizer(tapScreen)
-
-            self.butterflyBtn.isUserInteractionEnabled = true
-            tapButterfly.numberOfTapsRequired = 2
-            self.butterflyBtn.addGestureRecognizer(tapButterfly)
-
+            self.taps()
+            
             // When you WIN
             if self.count == 10 {
                 self.alertView(title: "Has Ganado",
@@ -118,5 +108,19 @@ class ViewController: UIViewController {
         alertController.addAction(cancelButton)
 
         present(alertController, animated: true)
+    }
+    
+    func taps(){
+        let tapButterfly = UITapGestureRecognizer(target: self,
+                                                  action: #selector(self.tapped(_:)))
+        let tapScreen = UITapGestureRecognizer(target: self,
+                                               action: #selector(self.tappedScreen(_:)))
+
+        tapScreen.numberOfTapsRequired = 2
+        self.screen.addGestureRecognizer(tapScreen)
+
+        self.butterflyBtn.isUserInteractionEnabled = true
+        tapButterfly.numberOfTapsRequired = 2
+        self.butterflyBtn.addGestureRecognizer(tapButterfly)
     }
 }
